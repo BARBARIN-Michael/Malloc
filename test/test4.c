@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:47:57 by barbare           #+#    #+#             */
-/*   Updated: 2017/02/14 16:36:37 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/17 16:24:01 by barbare          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int main(void)
 		i = 6;
 		while (--i > 0 && a > 0)
 			str[--a] = ft_malloc(VALUETINY);
-		dprintf(1, "Malloc de %d / 255 execute\n", a);
+		dprintf(2, "Malloc de %d / 255 execute\n", a);
 	}
-	dprintf(1, "\n\nC'est la fin des haricots verts !\n");
+	dprintf(2, "\n\nC'est la fin des haricots verts !\n");
 	show_alloc_mem();
 	a = 255;
 	while (--a > -1)
-		dprintf(1, "%p\n", str[a]);
+		dprintf(2, "%p\n", str[a]);
 	return (0);
 }

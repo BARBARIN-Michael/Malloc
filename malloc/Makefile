@@ -6,7 +6,7 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/02/17 17:02:46 by barbare          ###   ########.fr        #
+#    Updated: 2017/03/23 17:30:11 by barbare          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,11 @@ INC = -I./inc  -I../Libs/libft/include
 LIBS = -L$(LIBFTDIR) -lft
 
 SRCS = 	src/malloc.c 		\
-		src/tiny_malloc.c 	\
+		src/print_malloc.c 	\
 		src/memory.c		\
 		src/ft_malloc_rec.c	\
 		src/block.c			\
+		src/realloc.c			\
 		src/free.c
 
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))

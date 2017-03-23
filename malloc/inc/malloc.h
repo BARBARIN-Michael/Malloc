@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:37:14 by barbare           #+#    #+#             */
-/*   Updated: 2017/02/18 17:20:52 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:38:30 by barbare          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@
 
 # define NBADDR 1024
 
-# define CEIL(X) ((int)X)
+# define CEIL(X) ((X - (int)(X)) > 0 ? (int)(X + 1) : (int)(X))
 # define ALIGN4(X) (((((X) - 1) >> 2) << 2) + 4)
 # define MEMSIZE	size_t
 # define SIZEOF_ALIGN(X) (ALIGN4(sizeof(X)))
+# define BLOCK_EMPTY (t_block) {.mem = NULL}
 
 typedef struct s_unit		t_unit;
 typedef struct s_block		t_block;
@@ -91,25 +92,41 @@ struct					s_block
 };
 
 extern void			show_alloc_mem();
-
-extern void			ft_free(void *ptr);
-extern void 		*ft_malloc(size_t size);
+extern void			free(void *ptr);
+extern void 		*malloc(size_t size);
 extern void 		*realloc(void *ptr, size_t size);
 
-void				*ft_tinymalloc(size_t size);
-void				*ft_smallmalloc(size_t size);
-void				*ft_bigmalloc(size_t size);
-
+/*
+** Global
+*/
 t_unit				*get_unit(void);
 
-t_block				new_unitsmemory(int type);
-void				*get_zone(t_block **block, size_t size, int type);
-
+/*
+** ft_malloc_rec.c
+** search function
+*/
 t_return			rec_block_assign(t_block *first, t_return old, size_t size);
 t_return			rec_get_best_config(t_metadata *mdata, t_return ass,
 										size_t size, t_type type);
-t_block				create_memory(t_type type, size_t size);
 t_return			set_config(t_return ass, size_t size, t_type type);
 void				*insert_malloc(t_metadata **md, size_t size, t_type type);
+
+/*
+** memory.c
+*/
+t_block				create_memory(t_type type, size_t size);
+
+/*
+** metadata.c
+*/
+t_metadata			*create_metadata(void);
+t_return			set_metadata(t_return ass, size_t size);
+
+/*
+** block.c
+*/
+t_return			set_blockdata(t_return ass, size_t size, t_type type);
+t_block				*last_block(t_metadata *meta);
+t_block				*create_block(t_metadata *meta, void *mem, MEMSIZE size);
 
 #endif

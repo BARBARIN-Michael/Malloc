@@ -1,4 +1,4 @@
 MALLOC {
-	global: ft_malloc; ft_free; realloc; show_alloc_mem; # explicitly list symbols to be exported
+	global: ft_malloc; ft_free; realloc; show_alloc_mem; ft_realloc; # explicitly list symbols to be exported
     local: *;         # hide everything else
 };

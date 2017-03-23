@@ -6,21 +6,25 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:47:57 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/22 18:50:28 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/17 16:07:16 by barbare          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h> //TO DEL
 #include "malloc.h"
 
 int main(void)
 {
-	char *str;
+	void *str[5];
+	void *realloc;
 
-	str = ft_malloc(2);
+	str[0] = ft_malloc(2);
+	str[1] = ft_malloc(2);
 	show_alloc_mem();
-	//dprintf(1, "Fin du test : %p", str);
+	ft_free(str[0]);
+	show_alloc_mem();
+	realloc = ft_malloc(3);
+	dprintf(1, "Creation d'un realloc : %p\n", realloc);
+	show_alloc_mem();
 	return (0);
-	(void)str;
 }
