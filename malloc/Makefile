@@ -6,7 +6,7 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/03/23 17:30:11 by barbare          ###   ########.fr        #
+#    Updated: 2017/03/23 17:46:03 by barbare          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 SRC_INCLUDE = ./inc/*.h
 
 RM ?= rm -f
+LN ?= ln
 MKDIR ?= mkdir
 DIR = $(shell pwd)
 
@@ -50,6 +51,7 @@ print-% : ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
 $(NAME): $(LIBFTDIR)$(LIBFT) $(OBJS)
 	$(shell export LIBRARY_PATH=$(DIR))
 	$(CC) $(CFLAGS) -Wl,--version-script=malloc.export -shared -o $@ $^ $(INC) $(LIBS)
+	$(LN) -s $@ libft_malloc.so
 
 obj/%.o: src/%.c $(SRC_INCLUDE)
 	$(MKDIR) -p $(dir $@)
