@@ -6,14 +6,14 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:37:14 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 13:11:36 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:56:51 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
-# include <stdlib.h>
+# include <stdint.h>
 # include <sys/mman.h>
 # include <stdalign.h>
 # include <pthread.h>
@@ -95,6 +95,7 @@ struct				s_block
 extern void			show_alloc_mem();
 extern void			free(void *ptr);
 extern void			*malloc(size_t size);
+extern void			*calloc(size_t count, size_t size);
 extern void			*realloc(void *ptr, size_t size);
 
 /*
@@ -140,5 +141,11 @@ t_block				*create_block(t_metadata *meta, void *mem, MEMSIZE size);
 */
 void				print_block(t_block *blk, const char *type);
 void				print_ptr(uintmax_t hex);
+
+/*
+** print_memory.c
+*/
+
+void				dump_memory(char *mem);
 
 #endif

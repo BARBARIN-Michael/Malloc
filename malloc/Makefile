@@ -6,7 +6,7 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/03/24 12:49:44 by mbarbari         ###   ########.fr        #
+#    Updated: 2017/03/24 14:19:44 by mbarbari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = 	src/malloc.c 		\
 		src/block.c			\
 		src/realloc.c		\
 		src/metadata.c		\
+		src/dump.c			\
 		src/free.c
 
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))

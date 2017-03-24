@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:36:09 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 12:52:52 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:56:02 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ t_unit		*get_unit(void)
 	if (unit.pagesize == 0)
 		unit.pagesize = (size_t)getpagesize();
 	return (&unit);
+}
+
+void		*calloc(size_t count, size_t size)
+{
+	void		*mem;
+
+	mem = malloc(size * count);
+	pthread_mutex_lock(&(get_unit()->mutex));
+	ft_bzero(mem, size * count);
+	pthread_mutex_unlock(&(get_unit()->mutex));
+	return (mem);
 }
 
 void		*malloc(size_t size)
