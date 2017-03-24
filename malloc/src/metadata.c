@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:32:48 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 17:50:56 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:47:33 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ t_return		set_metadata(t_return ass, size_t size)
 	if (!ass.lastmeta || (!ass.freemeta && (!ass.block || nsize > 0)))
 	{
 		md = create_metadata();
-		((!ass.lastmeta) ? (ass.lastmeta = md) : (ass.lastmeta->next = md));
+		if (!ass.lastmeta)
+			ass.lastmeta = md;
+		else
+			ass.lastmeta->next = md;
 		if (!ass.freemeta)
 			ass.freemeta = md;
 	}

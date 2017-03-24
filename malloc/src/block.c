@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 11:17:29 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 17:34:59 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/24 12:45:31 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_return		set_blockdata(t_return ass, size_t size, t_type type)
 		ft_memcpy(ass.block, &tmp, SIZEOF_ALIGN(t_block));
 	}
 	nsize = size + MARGE(size);
-	nsize = ass.block && (ass.block->size >= size && (ass.block->size - size) > nsize) ?
+	nsize = ass.block &&
+		(ass.block->size >= size && (ass.block->size - size) > nsize) ?
 		ass.block->size - size : 0;
 	if (nsize > 0)
 	{
@@ -41,7 +42,7 @@ t_return		set_blockdata(t_return ass, size_t size, t_type type)
 	return (ass);
 }
 
-t_block		*last_block(t_metadata *meta)
+t_block			*last_block(t_metadata *meta)
 {
 	t_block		*block;
 
@@ -58,7 +59,7 @@ t_block		*last_block(t_metadata *meta)
 	return (block);
 }
 
-t_block		*create_block(t_metadata *meta, void *mem, MEMSIZE size)
+t_block			*create_block(t_metadata *meta, void *mem, MEMSIZE size)
 {
 	t_block		*block;
 	t_block		newblock;
@@ -68,4 +69,3 @@ t_block		*create_block(t_metadata *meta, void *mem, MEMSIZE size)
 	ft_memcpy(block, &newblock, SIZEOF_ALIGN(t_block));
 	return (NULL);
 }
-

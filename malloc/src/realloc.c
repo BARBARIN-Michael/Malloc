@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 15:46:59 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 12:38:19 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 13:13:26 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_block	*get_block(t_metadata *md, void *mem)
 	return (get_block(md->next, mem));
 }
 
-void		*realloc(void *mem, size_t size)
+void			*realloc(void *mem, size_t size)
 {
 	t_block		*tmp;
 	void		*newmalloc;

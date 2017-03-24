@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 12:57:39 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 12:38:08 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 13:12:05 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	check_block(t_block *block, void *mem)
 {
 	if (block->mem == mem)
 	{
+		if (getenv("MALLOC_DEBUG") != NULL)
+			print_block(block, "Free");
 		block->free = FREE;
 		return (TRUE);
 	}
@@ -74,4 +76,3 @@ void		free(void *mem)
 	}
 	pthread_mutex_unlock(&(get_unit()->mutex));
 }
-

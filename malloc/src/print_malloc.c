@@ -6,14 +6,24 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:51:06 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 12:07:52 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 13:12:32 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "malloc.h"
 
-void		print_ptr(uintmax_t hex)
+void			print_block(t_block *blk, const char *type)
+{
+	ft_putstr(type);
+	ft_putstr(" memory : 0x");
+	print_ptr((uintmax_t)blk->mem);
+	ft_putstr(" - 0x");
+	print_ptr((uintmax_t)(blk->mem + blk->size));
+	ft_putendl("");
+}
+
+void			print_ptr(uintmax_t hex)
 {
 	int			cmp;
 	uintmax_t	x;
@@ -39,7 +49,7 @@ void		print_ptr(uintmax_t hex)
 	write(1, &addr[ft_strlen(addr) - sizeof(int64_t)], sizeof(int64_t));
 }
 
-void		rec_block_read(t_block *block, size_t *total)
+static void		rec_block_read(t_block *block, size_t *total)
 {
 	if (block == NULL)
 		return ;
@@ -58,7 +68,7 @@ void		rec_block_read(t_block *block, size_t *total)
 	return (rec_block_read(block->next, total));
 }
 
-size_t		read_by_meta(t_metadata *meta, const char *type)
+static size_t	read_by_meta(t_metadata *meta, const char *type)
 {
 	size_t			total;
 
@@ -75,7 +85,7 @@ size_t		read_by_meta(t_metadata *meta, const char *type)
 	return (total);
 }
 
-void		show_alloc_mem()
+void			show_alloc_mem(void)
 {
 	size_t			total;
 

@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 11:27:35 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 17:37:29 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/24 13:12:06 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_return		rec_get_best_config(t_metadata *mdata, t_return ass,
 			(!ass.freemeta || ass.freemeta->nblocks > mdata->nblocks))
 		ass.freemeta = mdata;
 	if (mdata)
-		ass = rec_block_assign((void *)mdata + SIZEOF_ALIGN(t_metadata), ass, size);
+		ass = rec_block_assign((void *)mdata +
+				SIZEOF_ALIGN(t_metadata), ass, size);
 	if (mdata && mdata->next != NULL)
 		return (rec_get_best_config(mdata->next, ass, size, type));
 	else
@@ -55,6 +56,8 @@ void			*insert_malloc(t_metadata **mdata, size_t size, t_type type)
 	ass = set_config(ass, size, type);
 	if (!*mdata)
 		*mdata = ass.lastmeta;
+	if (getenv("MALLOC_DEBUG") != NULL)
+		print_block(ass.block, "Allocate");
 	ass.block->free = 0;
 	return (ass.block->mem);
 }

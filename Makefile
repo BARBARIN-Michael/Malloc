@@ -6,11 +6,11 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/03/24 12:01:03 by mbarbari         ###   ########.fr        #
+#    Updated: 2017/03/24 12:50:37 by mbarbari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC ?= gcc
+CC ?= clang
 CX ?= clang++
 
 malloc:

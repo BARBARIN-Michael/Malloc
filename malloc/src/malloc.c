@@ -6,16 +6,13 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:36:09 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/24 12:38:12 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:52:52 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //TO DEL
-#include <unistd.h> //TO DEL
 #include "libft.h"
 #include "malloc.h"
 #include <stdalign.h>
-
 
 t_unit		*get_unit(void)
 {

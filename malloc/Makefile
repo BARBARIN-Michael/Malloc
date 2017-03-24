@@ -6,7 +6,7 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/03/24 12:12:42 by mbarbari         ###   ########.fr        #
+#    Updated: 2017/03/24 12:49:44 by mbarbari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
 
 SRC_INCLUDE = ./inc/*.h
 
-RM ?= rm -f
+RM ?= rm
 LN ?= ln
 MKDIR ?= mkdir
 DIR = $(shell pwd)
@@ -67,7 +67,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(OBJS)
+	$(RM) libft_malloc.so
 
 re: clean all
 
