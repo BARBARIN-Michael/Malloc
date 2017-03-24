@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 16:51:06 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 16:14:33 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/24 12:07:52 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void		print_ptr(uintmax_t hex)
 
 	cmp = 0;
 	x = hex;
-	if ((len = ft_strlen(BASE16)) <= 1)
-		ft_putstr ("( NULL )");
+	len = ft_strlen(BASE16);
 	if (hex == 0)
 		ft_putstr("0");
 	while (x > 0)
@@ -80,10 +79,12 @@ void		show_alloc_mem()
 {
 	size_t			total;
 
+	pthread_mutex_lock(&(get_unit()->mutex));
 	total = read_by_meta(get_unit()->tiny, "TINY");
 	total += read_by_meta(get_unit()->small, "SMALL");
 	total += read_by_meta(get_unit()->big, "BIG");
 	ft_putstr("\n\nTotal : ");
 	ft_putnbr(total);
 	ft_putendl(" octets.");
+	pthread_mutex_unlock(&(get_unit()->mutex));
 }

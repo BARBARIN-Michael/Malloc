@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 15:46:59 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 18:48:20 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:38:19 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,23 @@ void		*realloc(void *mem, size_t size)
 	void		*newmalloc;
 
 	if (!mem)
-		return (malloc(size));
+	{
+		newmalloc = malloc(size);
+		return (newmalloc);
+	}
+	pthread_mutex_lock(&(get_unit()->mutex));
 	if (!(tmp = get_block(get_unit()->tiny, mem)) &&
 			!(tmp = get_block(get_unit()->small, mem)) &&
 				!(tmp = get_block(get_unit()->big, mem)))
+	{
+		pthread_mutex_unlock(&(get_unit()->mutex));
 		return (NULL);
+	}
+	pthread_mutex_unlock(&(get_unit()->mutex));
 	if (tmp->size > size)
+	{
 		return (tmp->mem);
+	}
 	newmalloc = malloc(size);
 	ft_memcpy(newmalloc, tmp->mem, tmp->size);
 	free(tmp->mem);

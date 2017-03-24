@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:37:14 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 18:22:05 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:42:03 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <sys/mman.h>
 # include <stdalign.h>
+# include <pthread.h>
 
 # define LENGTH_MB 8388608
 
@@ -73,6 +74,7 @@ struct					s_unit
 	t_metadata			*small;
 	t_metadata			*big;
 	int					pagesize;
+	pthread_mutex_t		mutex;
 };
 
 struct					s_metadata

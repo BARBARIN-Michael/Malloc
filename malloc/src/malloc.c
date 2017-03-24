@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 14:36:09 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 18:24:07 by mbarbari         ###   ########.fr       */
+/*   Updated: 2017/03/24 12:38:12 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 #include "malloc.h"
 #include <stdalign.h>
 
+
 t_unit		*get_unit(void)
 {
-	static t_unit unit = { NULL, NULL, NULL, 0 };
+	static t_unit unit = { NULL, NULL, NULL, 0, PTHREAD_MUTEX_INITIALIZER};
 
 	if (unit.pagesize == 0)
 		unit.pagesize = (size_t)getpagesize();
@@ -28,12 +29,16 @@ t_unit		*get_unit(void)
 void		*malloc(size_t size)
 {
 	size_t		align;
+	void		*mem;
 
+	pthread_mutex_lock(&(get_unit()->mutex));
 	align = ALIGN4(size);
 	if (align <= (size_t)(SMALL))
-		return (insert_malloc(&get_unit()->tiny, align, tiny));
+		mem = insert_malloc(&get_unit()->tiny, align, tiny);
 	else if (align <= (size_t)(LARGE))
-		return (insert_malloc(&get_unit()->small, align, small));
+		mem = insert_malloc(&get_unit()->small, align, small);
 	else
-		return (insert_malloc(&get_unit()->big, align, big));
+		mem = insert_malloc(&get_unit()->big, align, big);
+	pthread_mutex_unlock(&(get_unit()->mutex));
+	return (mem);
 }
