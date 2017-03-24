@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 12:57:39 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 17:41:11 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/23 18:47:14 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static int	check_free_with_munmap(t_metadata *md, void *mem)
 
 void		free(void *mem)
 {
+	if (mem == NULL)
+		return ;
 	if ((get_unit()->tiny && check_free(get_unit()->tiny, mem)) ||
 			(get_unit()->small && check_free(get_unit()->small, mem)) ||
 				(get_unit()->big &&

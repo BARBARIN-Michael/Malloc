@@ -6,7 +6,7 @@
 /*   By: barbare <barbare@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 17:32:48 by barbare           #+#    #+#             */
-/*   Updated: 2017/03/23 17:37:45 by barbare          ###   ########.fr       */
+/*   Updated: 2017/03/23 17:50:56 by mbarbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ t_return		set_metadata(t_return ass, size_t size)
 	size_t		nsize;
 
 	md = NULL;
-	//On recupere la taille en trop dans le block
 	nsize = size + MARGE(size);
 	nsize = ass.block && (ass.block->size - size) > nsize ?
 		ass.block->size - size : 0;
-	//On doit recreer un metadata car trop plein????
 	if (!ass.lastmeta || (!ass.freemeta && (!ass.block || nsize > 0)))
 	{
 		md = create_metadata();

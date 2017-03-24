@@ -6,7 +6,7 @@
 #    By: mbarbari <mbarbari@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/07 16:55:33 by mbarbari          #+#    #+#              #
-#    Updated: 2017/03/23 17:46:03 by barbare          ###   ########.fr        #
+#    Updated: 2017/03/23 17:54:23 by mbarbari         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRCS = 	src/malloc.c 		\
 		src/memory.c		\
 		src/ft_malloc_rec.c	\
 		src/block.c			\
-		src/realloc.c			\
+		src/realloc.c		\
+		src/metadata.c		\
 		src/free.c
 
 OBJS = $(patsubst src/%.c,obj/%.o,$(SRCS))
@@ -50,7 +51,7 @@ print-% : ; $(info $* is $(flavor $*) variable set to [$($*)]) @true
 
 $(NAME): $(LIBFTDIR)$(LIBFT) $(OBJS)
 	$(shell export LIBRARY_PATH=$(DIR))
-	$(CC) $(CFLAGS) -Wl,--version-script=malloc.export -shared -o $@ $^ $(INC) $(LIBS)
+	$(CC) $(CFLAGS) -shared -o $@ $^ $(INC) $(LIBS)
 	$(LN) -s $@ libft_malloc.so
 
 obj/%.o: src/%.c $(SRC_INCLUDE)
